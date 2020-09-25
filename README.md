@@ -17,6 +17,7 @@ centerface，dbface，retinaface，mtcnn，yoloface 这五个人脸检测网络�
 假如你使用的人脸检测器的输出没有关键点，而你想在人脸检测后做人脸对齐，那么检测人脸关键点的功能可以使用
 mtcnn_pfld_landmark.py里的类pfld_landmark，它就是PFLD人脸检测，需要注意的是，它的输入是在人脸检测之后剪切出的人脸roi区域。
 接下来是提取人脸特征向量，用的是arcface。
+
 在得到人脸特征向量的pkl文件后，运行detect_face_align_rec.py，就是做人脸检测→人脸对齐→人脸识别，需要注意的是
 在上一步提取已知身份的人脸特征向量的pkl文件时，get_face_feature.py使用的人脸检测器和现在detect_face_align_rec.py里使用的人脸检测器一致。
 
