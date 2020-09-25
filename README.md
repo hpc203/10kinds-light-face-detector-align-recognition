@@ -6,3 +6,5 @@ pytorch的安装命令是 pip install torch和pip install torchvision
 opencv的安装命令是 pip install opencv-python
 配置好运行环境之后，就可以运行程序了。
 运行 Run_all_compare_time.py，就可以看到9种人脸检测算法的结果和运行耗时统计直方图
+每一种人脸检测算法，我都用一个类包装起来的，在这个类有构造函数__init__和成员函数detect
+centerface，dbface，retinaface，mtcnn，yoloface 这五个人脸检测网络在输出检测框的同时还输出人脸里的5个关键点，用这5个关键点可以做人脸对齐的
