@@ -9,4 +9,5 @@ opencv的安装命令是 pip install opencv-python
 
 
 每一种人脸检测算法，我都用一个类包装起来的，在这个类有构造函数__init__和成员函数detect
-centerface，dbface，retinaface，mtcnn，yoloface 这五个人脸检测网络在输出检测框的同时还输出人脸里的5个关键点，用这5个关键点可以做人脸对齐的
+centerface，dbface，retinaface，mtcnn，yoloface 这五个人脸检测网络在输出检测框的同时还输出人脸里的5个关键点，
+用这5个关键点可以做人脸对齐的。它们的类构造函数里有个初始化参数align是用来决定是否做人脸对齐的开关
