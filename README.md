@@ -1,8 +1,8 @@
 # 10种轻量级人脸检测算法的比拼
 在下载完程序后，需要下载模型文件，才能正常运行程序。由于模型文件太多，无法直接上传，可以去百度云盘下载
-百度云盘下载链接: 链接: https://pan.baidu.com/s/1eEQIMNpNJZ-k7ShjrvO0PA 提取码: k61e
+百度云盘下载链接: 链接: 链接: https://pan.baidu.com/s/16EBjFG5tj6rp0m8TadDgHg 提取码: rqfb
 
-下载完成后一共有11个文件夹，把它们放到本仓库代码文件夹里。程序依赖pytorch和opencv，如果你的python环境里没有这两个库，那在Terminal输入pip安装。
+下载完成后一共有12个文件夹，把它们放到本仓库代码文件夹里。程序依赖pytorch和opencv，如果你的python环境里没有这两个库，那在Terminal输入pip安装。
 pytorch的安装命令是 pip install torch和pip install torchvision
 而opencv的安装命令是 pip install opencv-python
 配置好运行环境之后，就可以运行程序了。
@@ -24,3 +24,8 @@ mtcnn_pfld_landmark.py里的类pfld_landmark，它就是PFLD人脸检测，需�
 看近几年顶会的paper，在人脸检测→人脸对齐→人脸识别这三大模块里，做的最多的是人脸检测这个模块，几乎每年都有新的网络提出，我关心和感兴趣的也是人脸检测这个模块。
 而在人脸识别提取特征向量这个模块，创新性的工作都是在最后的全连接层后面的loss做改动创新，怎样让同类人脸更加聚拢，让不同类人脸的间距更大。
 在提取人脸特征向量这一步，目前也有很多种网络，比如ArcFace、SphereFace、CosFace等等的，如果想继续扩充现在的程序，读者可以把这些模块添加进来。
+
+需要注意的是，这里面有blazeface，我是参考 https://github.com/hollance/BlazeFace-PyTorch/blob/master/Inference.ipynb 
+把blazeface修改成类的形式，程序是能运行到。但是blazeface要求输入图片是128x128的，这个分辨率太低了，
+用本代码文件夹里的两幅图片resize到128x128，喂给blazeface做人脸检测的效果太差。
+因而我就没有把blazeface加入到Run_all_compare_time.py里做比较的
