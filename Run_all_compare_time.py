@@ -12,7 +12,7 @@ from facebox_detect_module import facebox_dnn
 from dbface_detect_align_module import dbface_detect as dbface
 from centerface_detect_align_module import centerface
 from lffd_detect_module import lffdface
-from libfacedetect_module import libfacedet
+from libfacedetect_align_module import libfacedet
 import matplotlib.pyplot as plt
 import inspect
 import argparse
