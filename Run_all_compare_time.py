@@ -12,6 +12,7 @@ from facebox_detect_module import facebox_dnn
 from dbface_detect_align_module import dbface_detect as dbface
 from centerface_detect_align_module import centerface
 from lffd_detect_module import lffdface
+from libfacedetect_module import libfacedet
 import matplotlib.pyplot as plt
 import inspect
 import argparse
@@ -37,6 +38,7 @@ if __name__ == "__main__":
     dbface_detect = dbface(device=device, align=align)
     centerface_detect = centerface(align=align)
     lffdface_detect = lffdface(version=1)
+    libface_detect = libfacedet(align=align)
 
     srcimg = cv2.imread(args.imgpath)
     
@@ -100,15 +102,30 @@ if __name__ == "__main__":
     lffdface_time = round(b - a, 3)
     cv2.putText(lffdface_result, 'lffdface waste time:' + str(lffdface_time), (20, 40), cv2.FONT_HERSHEY_DUPLEX, 1, (0, 0, 255))
 
-    results = (yolo_result, ultraface_result, ssdface_result, retinaface_result, mtcnn_result, facebox_result, facebox_dnn_result, dbface_result, centerface_result, lffdface_result)
-    waste_times = (yolo_time, ultraface_time, ssdface_time, retinaface_time, mtcnn_time, facebox_time, facebox_dnn_time, dbface_time, centerface_time, lffdface_time)
+    a = time.time()
+    libface_result, _ = libface_detect.detect(srcimg)
+    b = time.time()
+    libface_time = round(b - a, 3)
+    cv2.putText(libface_result, 'libface waste time:' + str(libface_time), (20, 40), cv2.FONT_HERSHEY_DUPLEX, 1, (0, 0, 255))
 
-    line1 = np.hstack(results[:5])
-    line2 = np.hstack(results[5:])
-    combined = np.vstack([line1, line2])
-    cv2.namedWindow('detect-compare', cv2.WINDOW_NORMAL)
-    cv2.imshow('detect-compare', combined)
-    # cv2.imwrite('out.jpg', combined)
+    results = (yolo_result, ultraface_result, ssdface_result, retinaface_result, mtcnn_result, facebox_result, facebox_dnn_result, dbface_result, centerface_result, lffdface_result, libface_result)
+    waste_times = (yolo_time, ultraface_time, ssdface_time, retinaface_time, mtcnn_time, facebox_time, facebox_dnn_time, dbface_time, centerface_time, lffdface_time, libface_time)
+
+    line1 = np.hstack(results[:3])
+    line2 = np.hstack(results[3:6])
+    line3 = np.hstack(results[6:9])
+    line4 = np.hstack(results[9:])
+    combined = np.vstack([line1, line2, line3])
+    cv2.namedWindow('detect-combined', cv2.WINDOW_NORMAL)
+    cv2.imshow('detect-combined', combined)
+    cv2.namedWindow('detect-combined2', cv2.WINDOW_NORMAL)
+    cv2.imshow('detect-combined2', line4)
+    # cv2.imwrite('combined_out.jpg', combined)
+    # cv2.imwrite('combined2_out.jpg', line4)
+    # cv2.imwrite('line1.jpg', line1)
+    # cv2.imwrite('line2.jpg', line2)
+    # cv2.imwrite('line3.jpg', line3)
+    # cv2.imwrite('line4.jpg', line4)
 
     for i,res in enumerate(results):
         winname = retrieve_name(res)[0]

@@ -72,7 +72,7 @@ class yoloface():
             image = torch.from_numpy(image)
             image = image.to(self.device).float()
             pred = self.net(image)[0]
-            pred = non_max_suppression(pred, 0.25, 0.35, multi_label=False, classes=0, agnostic=False, land=True,
+            pred = non_max_suppression(pred, 0.3, 0.35, multi_label=False, classes=0, agnostic=False, land=True,
                                        point_num=self.point_num)
             try:
                 det = pred[0].cpu().detach().numpy()
@@ -86,7 +86,7 @@ class yoloface():
             # text = "{:.4f}".format(b[4])
             b = list(map(int, b))   ###landmarks: numpy array, n x 10 (x1, y1 ... x5,y5)
             cv2.rectangle(drawimg, (b[0], b[1]), (b[2], b[3]), (0, 0, 255), thickness=2)
-            cx, cy = b[0], b[1] + 12
+            # cx, cy = b[0], b[1] + 12
             # cv2.putText(drawimg, text, (cx, cy), cv2.FONT_HERSHEY_DUPLEX, 0.5, (255, 255, 255))
 
             cv2.circle(drawimg, (b[5], b[6]), 1, (0, 0, 255), 4)
@@ -136,7 +136,7 @@ class yoloface():
             image = torch.from_numpy(image)
             image = image.to(self.device).float()
             pred = self.net(image)[0]
-            pred = non_max_suppression(pred, 0.25, 0.35, multi_label=False, classes=0, agnostic=False, land=True,
+            pred = non_max_suppression(pred, 0.3, 0.35, multi_label=False, classes=0, agnostic=False, land=True,
                                        point_num=self.point_num)
             try:
                 det = pred[0].cpu().detach().numpy()
