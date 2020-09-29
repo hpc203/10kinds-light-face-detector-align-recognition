@@ -8,7 +8,7 @@ pytorch的安装命令是 pip install torch和pip install torchvision
 配置好运行环境之后，就可以运行程序了。
 运行 Run_all_compare_time.py，就可以看到10种人脸检测算法的结果和运行耗时统计直方图。效果可以看我的csdn博客文章(地址是 https://blog.csdn.net/nihate/article/details/108798831 )里的图
 
-每一种人脸检测算法，我都用一个类包装起来的，在这个类有构造函数__init__和成员函数detect
+每一种人脸检测算法，我都用一个类包装起来的，在这个类有构造函数__init__和成员函数detect。其中
 centerface，dbface，retinaface，mtcnn，yoloface，libface 这六个人脸检测网络在输出检测框的同时还输出人脸里的5个关键点，
 用这5个关键点可以做人脸对齐的。它们的类构造函数里有个初始化参数align是用来决定是否做人脸对齐的开关，在人脸识别系统里，人脸对齐这一步不是必选项的。
 
@@ -28,4 +28,4 @@ mtcnn_pfld_landmark.py里的类pfld_landmark，它就是PFLD人脸检测，需�
 需要注意的是，这里面有blazeface，我是参考 https://github.com/hollance/BlazeFace-PyTorch/blob/master/Inference.ipynb 
 把blazeface修改成类的形式，程序是能运行到。但是blazeface要求输入图片是128x128的，这个分辨率太低了，
 用本代码文件夹里的两幅图片resize到128x128，喂给blazeface做人脸检测的效果太差。
-因而我就没有把blazeface加入到Run_all_compare_time.py里做比较的
+因而我就没有把blazeface加入到Run_all_compare_time.py里做比较的。
