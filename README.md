@@ -1,15 +1,15 @@
-# 9种轻量级人脸检测算法的比拼
+# 10种轻量级人脸检测算法的比拼
 在下载完程序后，需要下载模型文件，才能正常运行程序。由于模型文件太多，无法直接上传，可以去百度云盘下载
-百度云盘下载链接: https://pan.baidu.com/s/1AYqDypnpsmHwqDScoCwzKw 提取码: uncm
+百度云盘下载链接: 链接: https://pan.baidu.com/s/1eEQIMNpNJZ-k7ShjrvO0PA 提取码: k61e
 
-下载完成后一共有10个文件夹，把它们放到本仓库代码文件夹里。程序依赖pytorch和opencv，如果你的python环境里没有这两个库，那在Terminal输入pip安装。
+下载完成后一共有11个文件夹，把它们放到本仓库代码文件夹里。程序依赖pytorch和opencv，如果你的python环境里没有这两个库，那在Terminal输入pip安装。
 pytorch的安装命令是 pip install torch和pip install torchvision
 而opencv的安装命令是 pip install opencv-python
 配置好运行环境之后，就可以运行程序了。
-运行 Run_all_compare_time.py，就可以看到9种人脸检测算法的结果和运行耗时统计直方图。效果可以看我的csdn博客文章(地址是 https://blog.csdn.net/nihate/article/details/108798831 )里的图
+运行 Run_all_compare_time.py，就可以看到10种人脸检测算法的结果和运行耗时统计直方图。效果可以看我的csdn博客文章(地址是 https://blog.csdn.net/nihate/article/details/108798831 )里的图
 
 每一种人脸检测算法，我都用一个类包装起来的，在这个类有构造函数__init__和成员函数detect
-centerface，dbface，retinaface，mtcnn，yoloface 这五个人脸检测网络在输出检测框的同时还输出人脸里的5个关键点，
+centerface，dbface，retinaface，mtcnn，yoloface，libface 这六个人脸检测网络在输出检测框的同时还输出人脸里的5个关键点，
 用这5个关键点可以做人脸对齐的。它们的类构造函数里有个初始化参数align是用来决定是否做人脸对齐的开关，在人脸识别系统里，人脸对齐这一步不是必选项的。
 
 如果你想构建一个人脸识别系统，那可以先运行get_face_feature.py，它是获取人脸特征向量的，最后会生成一个已知身份的人脸特征向量的pkl文件。
