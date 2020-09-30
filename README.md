@@ -26,6 +26,6 @@ mtcnn_pfld_landmark.py里的类pfld_landmark，它就是PFLD人脸检测，需�
 在提取人脸特征向量这一步，目前也有很多种网络，比如ArcFace、SphereFace、CosFace等等的，如果想继续扩充现在的程序，读者可以把这些模块添加进来。
 
 需要注意的是，这里面有blazeface，我是参考 https://github.com/hollance/BlazeFace-PyTorch/blob/master/Inference.ipynb 
-把blazeface修改成类的形式，程序是能运行到。但是blazeface要求输入图片是128x128的，这个分辨率太低了，
+把blazeface修改成类的形式，程序是能正常运行的。但是blazeface要求输入图片是128x128的，这个分辨率太低了，
 用本代码文件夹里的两幅图片resize到128x128，喂给blazeface做人脸检测的效果太差。
 因而我就没有把blazeface加入到Run_all_compare_time.py里做比较的。
