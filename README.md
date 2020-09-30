@@ -1,6 +1,6 @@
 # 10种轻量级人脸检测算法的比拼
-在下载完程序后，需要下载模型文件，才能正常运行程序。由于模型文件太多，无法直接上传，可以去百度云盘下载
-百度云盘下载链接: 链接: 链接: https://pan.baidu.com/s/16EBjFG5tj6rp0m8TadDgHg 提取码: rqfb
+在下载完程序后，需要下载模型文件，才能正常运行程序。由于模型文件太多，无法直接上传，可以去百度云盘下载，
+链接: https://pan.baidu.com/s/16EBjFG5tj6rp0m8TadDgHg 提取码: rqfb
 
 下载完成后一共有12个文件夹，把它们放到本仓库代码文件夹里。程序依赖pytorch和opencv，如果你的python环境里没有这两个库，那在Terminal输入pip安装。
 pytorch的安装命令是 pip install torch和pip install torchvision
