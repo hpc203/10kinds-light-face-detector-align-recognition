@@ -3,12 +3,16 @@ import numpy as np
 from ultraface.utils import define_img_size, convert_locations_to_boxes, center_form_to_corner_form, predict
 
 class ultraface():
-    def __init__(self, framework='onnx', threshold=0.7):
-        if framework=='onnx':
-            self.net = cv2.dnn.readNetFromONNX('ultraface/version-RFB-320_simplified.onnx')
+    def __init__(self, framework='onnx', input_img_size = 320, threshold=0.7):
+        if input_img_size == 320:
+            if framework=='onnx':
+                self.net = cv2.dnn.readNetFromONNX('ultraface/version-RFB-320_simplified.onnx')
+            else:
+                self.net = cv2.dnn.readNetFromCaffe('ultraface/RFB-320.prototxt', 'ultraface/RFB-320.caffemodel')
+            self.input_size = (320, 240)
         else:
-            self.net = cv2.dnn.readNetFromCaffe('ultraface/RFB-320.prototxt', 'ultraface/RFB-320.caffemodel')
-        self.input_size = (320, 240)
+            self.net = cv2.dnn.readNetFromONNX('ultraface/version-RFB-640.onnx')
+            self.input_size = (640, 480)
         self.priors = define_img_size(self.input_size)
         self.threshold = threshold
         self.center_variance = 0.1
@@ -47,8 +51,8 @@ class ultraface():
         return boxes.tolist(), face_rois
 
 if __name__ == '__main__':
-    ultraface_detect = ultraface(framework='onnx')
-    imgpath = 's_l.jpg'
+    ultraface_detect = ultraface(framework='onnx', input_img_size=640)
+    imgpath = 'selfie.jpg'
     srcimg = cv2.imread(imgpath)
     drawimg, face_rois = ultraface_detect.detect(srcimg)
 
