@@ -20,7 +20,7 @@ class libfacedet():
         h, w, _ = img.shape
         img_resize = cv2.resize(img, dst=None, dsize=(self.input_shape), interpolation=cv2.INTER_LINEAR)
         hr, wr, _ = img_resize.shape
-        blob = cv2.dnn.blobFromImage(img_resize, size=self.input_shape)
+        blob = cv2.dnn.blobFromImage(img_resize)
         self.net.setInput(blob)
         # output_names = ['loc', 'conf']
         # loc, conf = net.forward(output_names)
@@ -58,7 +58,7 @@ class libfacedet():
         h, w, _ = img.shape
         img_resize = cv2.resize(img, dst=None, dsize=(self.input_shape), interpolation=cv2.INTER_LINEAR)
         hr, wr, _ = img_resize.shape
-        blob = cv2.dnn.blobFromImage(img_resize, size=self.input_shape)
+        blob = cv2.dnn.blobFromImage(img_resize)
         self.net.setInput(blob)
         # output_names = ['loc', 'conf']
         # loc, conf = net.forward(output_names)
