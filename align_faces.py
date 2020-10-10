@@ -63,10 +63,6 @@ def align_process(img, bbox, landmark, image_size):
             src = src / 112 * image_size[0]
 
         dst = landmark.astype(np.float32)
-
-        # tform = trans.SimilarityTransform()
-        # tform.estimate(dst, src)
-        # M = tform.params[0:2, :]
         M, _ = cv2.estimateAffinePartial2D(dst.reshape(1,5,2), src.reshape(1,5,2))
 
     if M is None:
