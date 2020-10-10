@@ -18,9 +18,7 @@ class libfacedet():
         self.align = align
     def detect(self, img):
         h, w, _ = img.shape
-        img_resize = cv2.resize(img, dst=None, dsize=(self.input_shape), interpolation=cv2.INTER_LINEAR)
-        hr, wr, _ = img_resize.shape
-        blob = cv2.dnn.blobFromImage(img_resize)
+        blob = cv2.dnn.blobFromImage(img, size=self.input_shape)
         self.net.setInput(blob)
         # output_names = ['loc', 'conf']
         # loc, conf = net.forward(output_names)
@@ -56,9 +54,7 @@ class libfacedet():
             return img, []
     def get_face(self, img):
         h, w, _ = img.shape
-        img_resize = cv2.resize(img, dst=None, dsize=(self.input_shape), interpolation=cv2.INTER_LINEAR)
-        hr, wr, _ = img_resize.shape
-        blob = cv2.dnn.blobFromImage(img_resize)
+        blob = cv2.dnn.blobFromImage(img, size=self.input_shape)
         self.net.setInput(blob)
         # output_names = ['loc', 'conf']
         # loc, conf = net.forward(output_names)
