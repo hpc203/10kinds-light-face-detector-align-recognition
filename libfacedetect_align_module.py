@@ -21,7 +21,7 @@ class libfacedet():
         blob = cv2.dnn.blobFromImage(img, size=self.input_shape)
         self.net.setInput(blob)
         # output_names = ['loc', 'conf']
-        # loc, conf = net.forward(output_names)
+        # loc, conf = self.net.forward(output_names)
         loc, conf = self.net.forward(self.net.getUnconnectedOutLayersNames())
         # Decode bboxes and landmarks
         pb = PriorBox(input_shape=self.input_shape, output_shape=(w, h))
@@ -57,7 +57,7 @@ class libfacedet():
         blob = cv2.dnn.blobFromImage(img, size=self.input_shape)
         self.net.setInput(blob)
         # output_names = ['loc', 'conf']
-        # loc, conf = net.forward(output_names)
+        # loc, conf = self.net.forward(output_names)
         loc, conf = self.net.forward(self.net.getUnconnectedOutLayersNames())
         # Decode bboxes and landmarks
         pb = PriorBox(input_shape=self.input_shape, output_shape=(w, h))
@@ -95,8 +95,9 @@ targets = (cv2.dnn.DNN_TARGET_CPU,
            cv2.dnn.DNN_TARGET_MYRIAD)
 
 if __name__ == "__main__" :
-    libface_detect = libfacedet()
-    imgpath = 's_l.jpg'
+    libface_detect = libfacedet(align=True)
+    # imgpath = 's_l.jpg'
+    imgpath = 'D:/face-recognition/faceboxes/FaceBoxes-PyTorch-master/data/8.jpg'
 
     srcimg = cv2.imread(imgpath)
 

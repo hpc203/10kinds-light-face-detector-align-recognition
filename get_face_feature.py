@@ -6,6 +6,18 @@ import os
 import pickle
 import sys
 
+def convert_onnx():
+    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    model_path = 'arcface/resnet18_110.pth'
+    model = resnet_face18(use_se=False)
+    model = torch.nn.DataParallel(model)
+    model.load_state_dict(torch.load(model_path, map_location=device))
+    model.to(device)
+    model.eval()
+    dummy_input = torch.randn(1, 1, 128, 128).to(device)
+    onnx_path = 'arcface/resnet18_110.onnx'
+    torch.onnx.export(model, dummy_input, onnx_path, input_names=['input'], output_names=['output'])
+
 class arcface():
     def __init__(self, model_path='arcface/resnet18_110.pth', device = 'cuda'):
         self.model = resnet_face18(use_se=False)
@@ -29,11 +41,24 @@ class arcface():
             output = output.data.cpu().numpy()
         return output
 
+class arcface_dnn():
+    def __init__(self, model_path='arcface/resnet18_110.onnx'):
+        self.model = cv2.dnn.readNetFromONNX(model_path)
+        self.input_size = (128, 128)
+    def get_feature(self, img):
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        img = cv2.resize(img, self.input_size, interpolation=cv2.INTER_AREA)
+        blob = cv2.dnn.blobFromImage(img, scalefactor=1 / 127.5, mean=127.5)
+        self.model.setInput(blob)
+        output = self.model.forward(['output'])
+        return output
+
 if __name__ == '__main__':
     from yoloface_detect_align_module import yoloface    ###你还可以选择其他的人脸检测器
 
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
-    face_embdnet = arcface(device=device)
+    # face_embdnet = arcface(device=device)
+    face_embdnet = arcface_dnn()   ###已调试通过，与pytorch版本的输出结果吻合
     detect_face = yoloface(device=device)
 
     out_emb_path = 'yoloface_detect_arcface_feature.pkl'
