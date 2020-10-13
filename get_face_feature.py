@@ -5,13 +5,21 @@ import numpy as np
 import os
 import pickle
 import sys
+from collections import OrderedDict
 
 def convert_onnx():
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     model_path = 'arcface/resnet18_110.pth'
     model = resnet_face18(use_se=False)
-    model = torch.nn.DataParallel(model)
-    model.load_state_dict(torch.load(model_path, map_location=device))
+    # model = torch.nn.DataParallel(model)
+    # model.load_state_dict(torch.load(model_path, map_location=device))
+
+    state_dict = torch.load(model_path, map_location=device)
+    new_state_dict = OrderedDict()
+    for k, v in state_dict.items():
+        new_state_dict[k.replace('module.', '')] = v    ## remove 'module.'
+    model.load_state_dict(new_state_dict)
+
     model.to(device)
     model.eval()
     dummy_input = torch.randn(1, 1, 128, 128).to(device)
@@ -21,8 +29,15 @@ def convert_onnx():
 class arcface():
     def __init__(self, model_path='arcface/resnet18_110.pth', device = 'cuda'):
         self.model = resnet_face18(use_se=False)
-        self.model = torch.nn.DataParallel(self.model)
-        self.model.load_state_dict(torch.load(model_path, map_location=device))
+        # self.model = torch.nn.DataParallel(self.model)
+        # self.model.load_state_dict(torch.load(model_path, map_location=device))
+
+        state_dict = torch.load(model_path, map_location=device)
+        new_state_dict = OrderedDict()
+        for k, v in state_dict.items():
+            new_state_dict[k.replace('module.', '')] = v  ## remove 'module.'
+        self.model.load_state_dict(new_state_dict)
+
         self.model.to(device)
         self.model.eval()
         self.device = device
