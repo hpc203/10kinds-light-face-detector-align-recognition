@@ -32,4 +32,5 @@ mtcnn_pfld_landmark.py里的类pfld_landmark，它就是PFLD人脸检测，需�
 
 10月15日，经过这几天运行程序比较，想要做一个实时人脸识别系统，libfacedetect是做人脸检测的最佳选择，
 此外，我把PFLD人脸关键点检测模型转换成onnx格式的，这样就可以使用opencv的dnn模块做PFLD人脸关键点检测，
-这部分代码在libfacedetect_align_module.py里。把libfacedetect和PFLD串联起来组成一个人脸+关键点检测的程序。
+这部分代码在libfacedetect_align_module.py里。我依然编写一个类，把libfacedetect和PFLD串联起来，
+仅仅使用opencv的dnn模块，实现一个人脸+关键点检测的功能。
