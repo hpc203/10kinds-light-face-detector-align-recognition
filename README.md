@@ -29,3 +29,7 @@ mtcnn_pfld_landmark.py里的类pfld_landmark，它就是PFLD人脸检测，需�
 把blazeface修改成类的形式，程序是能正常运行的。但是blazeface要求输入图片是128x128的，这个分辨率太低了，
 用本代码文件夹里的两幅图片resize到128x128，喂给blazeface做人脸检测的效果太差。
 因而我就没有把blazeface加入到Run_all_compare_time.py里做比较的。
+
+10月15日，经过这几天运行程序比较，想要做一个实时人脸识别系统，libfacedetect是做人脸检测的最佳选择，
+此外，我把PFLD人脸关键点检测模型转换成onnx格式的，这样就可以使用opencv的dnn模块做PFLD人脸关键点检测，
+这部分代码在libfacedetect_align_module.py里。把libfacedetect和PFLD串联起来组成一个人脸+关键点检测的程序。
