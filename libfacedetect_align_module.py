@@ -143,7 +143,7 @@ class libface_pfld():
                     pre_landmark = pre_landmark.cpu().detach().numpy().reshape(-1, 2) * [face_roi.shape[1], face_roi.shape[0]]
                 # np.save('pfld_mtcnn/pfld_pytorch_output.npy', pre_landmark)
                 for (x, y) in pre_landmark.astype(np.int32):
-                    cv2.circle(drawimg, (x1 + x, y1 + y), 2, (0, 255, 0))
+                    cv2.circle(drawimg, (x1 + x, y1 + y), 2, (0, 255, 0), thickness=-1)
             return drawimg
         else:
             print('No faces found.')
@@ -208,7 +208,7 @@ class libface_pfld_dnn():
                 pre_landmark = pre_landmark.reshape(-1, 2) * [face_roi.shape[1], face_roi.shape[0]]
                 # np.save('pfld_mtcnn/pfld_dnn_output.npy', pre_landmark)
                 for (x, y) in pre_landmark.astype(np.int32):
-                    cv2.circle(drawimg, (x1 + x, y1 + y), 2, (0, 255, 0))
+                    cv2.circle(drawimg, (x1 + x, y1 + y), 2, (0, 255, 0), thickness=-1)
             return drawimg
         else:
             print('No faces found.')
@@ -226,7 +226,7 @@ class pfld_dnn():
         pre_landmark = pre_landmark.reshape(-1, 2) * [crop_img.shape[1], crop_img.shape[0]]
         drawimg = crop_img.copy()
         for (x, y) in pre_landmark.astype(np.int32):
-            cv2.circle(drawimg, (x, y), 2, (0, 255, 0))
+            cv2.circle(drawimg, (x, y), 2, (0, 255, 0), thickness=-1)
         return drawimg
 
 if __name__ == "__main__" :
