@@ -5,7 +5,7 @@ import numpy as np
 from yoloface_detect_align_module import yoloface
 from ultraface_detect_module import ultraface
 from ssdface_detect_module import ssdface
-from retinaface_detect_align_module import retinaface
+from retinaface_detect_align_module import retinaface, retinaface_dnn
 from mtcnn_pfld_landmark import mtcnn_detect as mtcnnface
 from facebox_detect_module import facebox_pytorch as facebox
 from facebox_detect_module import facebox_dnn
@@ -32,6 +32,7 @@ if __name__ == "__main__":
     ultraface_detect = ultraface()
     ssdface_detect = ssdface()
     retinaface_detect = retinaface(device=device, align=align)
+    retinaface_dnn_detect = retinaface_dnn(align=align)
     mtcnn_detect = mtcnnface(device=device, align=align)
     facebox_detect = facebox(device=device)
     facebox_dnn_detect = facebox_dnn()
@@ -65,6 +66,12 @@ if __name__ == "__main__":
     b = time.time()
     retinaface_time = round(b - a, 3)
     cv2.putText(retinaface_result, 'retinaface waste time:' + str(retinaface_time), (20, 40), cv2.FONT_HERSHEY_DUPLEX, 1, (0, 0, 255))
+
+    a = time.time()
+    retinaface_dnn_result, _ = retinaface_dnn_detect.detect(srcimg)
+    b = time.time()
+    retinaface_dnn_time = round(b - a, 3)
+    cv2.putText(retinaface_dnn_result, 'retinaface_dnn waste time:' + str(retinaface_dnn_time), (20, 40), cv2.FONT_HERSHEY_DUPLEX, 1, (0, 0, 255))
 
     a = time.time()
     mtcnn_result, _ = mtcnn_detect.detect(srcimg)
@@ -108,24 +115,22 @@ if __name__ == "__main__":
     libface_time = round(b - a, 3)
     cv2.putText(libface_result, 'libface waste time:' + str(libface_time), (20, 40), cv2.FONT_HERSHEY_DUPLEX, 1, (0, 0, 255))
 
-    results = (yolo_result, ultraface_result, ssdface_result, retinaface_result, mtcnn_result, facebox_result, facebox_dnn_result, dbface_result, centerface_result, lffdface_result, libface_result)
-    waste_times = (yolo_time, ultraface_time, ssdface_time, retinaface_time, mtcnn_time, facebox_time, facebox_dnn_time, dbface_time, centerface_time, lffdface_time, libface_time)
+    results = (yolo_result, ultraface_result, ssdface_result, retinaface_result, retinaface_dnn_result, mtcnn_result,
+               facebox_result, facebox_dnn_result, dbface_result, centerface_result, lffdface_result, libface_result)
+    waste_times = (
+    yolo_time, ultraface_time, ssdface_time, retinaface_time, retinaface_dnn_time, mtcnn_time, facebox_time,
+    facebox_dnn_time, dbface_time, centerface_time, lffdface_time, libface_time)
 
-    line1 = np.hstack(results[:3])
-    line2 = np.hstack(results[3:6])
-    line3 = np.hstack(results[6:9])
-    line4 = np.hstack(results[9:])
+    line1 = np.hstack(results[:4])
+    line2 = np.hstack(results[4:8])
+    line3 = np.hstack(results[8:])
     combined = np.vstack([line1, line2, line3])
     cv2.namedWindow('detect-combined', cv2.WINDOW_NORMAL)
     cv2.imshow('detect-combined', combined)
-    cv2.namedWindow('detect-combined2', cv2.WINDOW_NORMAL)
-    cv2.imshow('detect-combined2', line4)
-    # cv2.imwrite('combined_out.jpg', combined)
-    # cv2.imwrite('combined2_out.jpg', line4)
+    cv2.imwrite('combined_out.jpg', combined)
     # cv2.imwrite('line1.jpg', line1)
     # cv2.imwrite('line2.jpg', line2)
     # cv2.imwrite('line3.jpg', line3)
-    # cv2.imwrite('line4.jpg', line4)
 
     for i,res in enumerate(results):
         winname = retrieve_name(res)[0]

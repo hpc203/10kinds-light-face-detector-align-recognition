@@ -49,7 +49,7 @@ class libfacedet():
                 landmark = landmark.astype(np.int32)
                 for j in range(5):
                     cv2.circle(drawimg, (landmark[j, 0], landmark[j, 1]), 2, (0, 255, 0), thickness=-1)
-                    cv2.putText(drawimg, str(j), (landmark[j, 0], landmark[j, 1] + 12), cv2.FONT_HERSHEY_DUPLEX, 1, (0, 0, 255))
+                    # cv2.putText(drawimg, str(j), (landmark[j, 0], landmark[j, 1] + 12), cv2.FONT_HERSHEY_DUPLEX, 1, (0, 0, 255))
                 face_rois.append(face_roi)
             return drawimg, face_rois
         else:
