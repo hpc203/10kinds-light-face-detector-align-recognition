@@ -15,7 +15,7 @@ centerface，dbface，retinaface，mtcnn，yoloface，libface 这六个人脸检
 如果你想构建一个人脸识别系统，那可以先运行get_face_feature.py，它是获取人脸特征向量的，最后会生成一个已知身份的人脸特征向量的pkl文件。
 在这个.py文件里，使用的人脸检测器是yoloface，如果你想换用其它的人脸检测器，那就修改主函数开头的from...import...即可。
 假如你使用的人脸检测器的输出没有关键点，而你想在人脸检测后做人脸对齐，那么检测人脸关键点的功能可以使用
-mtcnn_pfld_landmark.py里的类pfld_landmark，它就是PFLD人脸检测，需要注意的是，它的输入是在人脸检测之后剪切出的人脸roi区域。
+mtcnn_pfld_landmark.py里的类pfld_landmark，它就是PFLD人脸关键点检测，需要注意的是，它的输入是在人脸检测之后剪切出的人脸roi区域。
 接下来是提取人脸特征向量，用的是arcface。
 
 在得到人脸特征向量的pkl文件后，运行detect_face_align_rec.py，就是做人脸检测→人脸对齐→人脸识别，需要注意的是
