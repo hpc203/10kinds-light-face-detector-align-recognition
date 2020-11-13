@@ -93,9 +93,10 @@ if __name__ == '__main__':
                 continue
 
             feature_out = face_embdnet.get_feature(face_img[0])
-            feature_list.append(feature_out)
+            feature_list.append(np.squeeze(feature_out))
             name_list.append(name)
 
-    face_feature = (np.squeeze(np.asarray(feature_list)), name_list)
-    with open(out_emb_path, 'wb') as f:
-        pickle.dump(face_feature, f)
+    if len(feature_list)>0:
+        face_feature = (np.asarray(feature_list), name_list)
+        with open(out_emb_path, 'wb') as f:
+            pickle.dump(face_feature, f)

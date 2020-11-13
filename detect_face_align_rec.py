@@ -6,6 +6,7 @@ import cv2
 import numpy as np
 from scipy import spatial
 import argparse
+import os
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Object Detection using YOLO in OPENCV')
@@ -16,6 +17,8 @@ if __name__ == '__main__':
     face_embdnet = arcface(device=device)
     detect_face = yoloface(device=device)
     emb_path = 'yolo_detect_arcface_feature.pkl'
+    if not os.path.exists(emb_path):
+        exit(emb_path + ' not exist!!!')
     with open(emb_path, 'rb') as f:
         dataset = pickle.load(f)
     faces_feature, names_list = dataset
