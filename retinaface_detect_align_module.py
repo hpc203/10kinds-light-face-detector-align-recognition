@@ -83,7 +83,7 @@ if __name__ == "__main__":
     # retinaface_detect = retinaface(device=device, align=True)
     retinaface_detect = retinaface_dnn(align=True)
     ###dnn版本和pytorch版本的一个区别是: pytorch版本的输入图片不做resize就进入到网络里，而dnn版本的输入图片要resize到固定尺寸的,
-    ###输入不同，因此对这两个版本的输出做比较
+    ###输入不同，因此对这两个版本的输出不做比较
 
     imgpath = 's_l.jpg'
     srcimg = cv2.imread(imgpath)
