@@ -38,4 +38,4 @@ mtcnn_pfld_landmark.py里的类pfld_landmark，它就是PFLD人脸关键点检�
 仅仅使用opencv的dnn模块，实现一个人脸+关键点检测的功能。
 
 10月21日，我编写了retinaface的dnn版本，使得用retinaface做人脸检测，只依赖opencv的dnn模块，解码和nms后处理依赖numpy，
-从而使retinaface的整个人联检测流程彻底摆脱对pytorch的依赖。
+从而使retinaface的整个人脸检测流程彻底摆脱对pytorch的依赖。
