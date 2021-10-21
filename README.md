@@ -45,3 +45,5 @@ https://github.com/hpc203/yolov5-face-landmarks-opencv-v2
 
 2021年10月17日，我编写了使用OpenCV部署SCRFD人脸和关键点检测，包含C++和Python两种版本的程序，源码在我的github仓库的另一个项目里，地址是：
 https://github.com/hpc203/scrfd-opencv
+
+有兴趣的开发者，可以把这两个人脸检测程序也添加进来
