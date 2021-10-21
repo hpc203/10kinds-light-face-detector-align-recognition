@@ -39,3 +39,9 @@ mtcnn_pfld_landmark.py里的类pfld_landmark，它就是PFLD人脸关键点检�
 
 10月21日，我编写了retinaface的dnn版本，使得用retinaface做人脸检测，只依赖opencv的dnn模块，解码和nms后处理依赖numpy，
 从而使retinaface的整个人脸检测流程彻底摆脱对pytorch的依赖。
+
+2012年5月1日，我编写了使用OpenCV部署yolov5人脸和关键点检测，包含C++和Python两种版本的程序，源码在我的github仓库的另一个项目里，地址是：
+https://github.com/hpc203/yolov5-face-landmarks-opencv-v2
+
+2021年10月17日，我编写了使用OpenCV部署SCRFD人脸和关键点检测，包含C++和Python两种版本的程序，源码在我的github仓库的另一个项目里，地址是：
+https://github.com/hpc203/scrfd-opencv
